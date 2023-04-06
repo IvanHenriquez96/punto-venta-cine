@@ -5,7 +5,7 @@ const Seat = () => {
 
   return (
     <div
-      className={`h-10 mx-auto my-2  md:w-10 rounded-tl-xl rounded-tr-xl hover:bg-red-200 ${
+      className={`h-7 md:h-16 md:mx-auto  my-2 mx-1  md:w-12 rounded-tl-xl rounded-tr-xl hover:bg-red-200 ${
         isDisponible ? "bg-white" : "bg-gray-400"
       }`}
     ></div>
