@@ -2,7 +2,11 @@ export const movies = [
   {
     id: 1,
     nombre: "Avengers: Endgame",
-    horarios: ["10:00 AM", "2:00 PM", "7:00 PM"],
+    horarios: [
+      { horario: "10:00 AM", asientos_ocupados: [] },
+      { horario: "2:00 PM", asientos_ocupados: [] },
+      { horario: "7:00 PM", asientos_ocupados: [] },
+    ],
     precio: 10.99,
     clasificacion: "PG-13",
     sala: "1",
@@ -13,7 +17,12 @@ export const movies = [
   {
     id: 2,
     nombre: "Spider-Man: No Way Home",
-    horarios: ["11:00 AM", "3:00 PM", "8:00 PM"],
+    horarios: [
+      { horario: "11:00 AM", asientos_ocupados: [] },
+      { horario: "3:00 PM", asientos_ocupados: [] },
+      { horario: "8:00 PM", asientos_ocupados: [] },
+    ],
+    asientos_ocupados: [],
     precio: 12.99,
     clasificacion: "PG-13",
     sala: "2",
@@ -23,7 +32,11 @@ export const movies = [
   {
     id: 3,
     nombre: "The Batman",
-    horarios: ["12:00 PM", "4:00 PM", "9:00 PM"],
+    horarios: [
+      { horario: "12:00 PM", asientos_ocupados: [] },
+      { horario: "4:00 PM", asientos_ocupados: [] },
+      { horario: "9:00 PM", asientos_ocupados: [] },
+    ],
     precio: 11.99,
     clasificacion: "PG-13",
     sala: "3",
@@ -33,7 +46,11 @@ export const movies = [
   {
     id: 4,
     nombre: "Jurassic World: Dominion",
-    horarios: ["1:00 PM", "5:00 PM", "10:00 PM"],
+    horarios: [
+      { horario: "1:00 PM", asientos_ocupados: [] },
+      { horario: "5:00 PM", asientos_ocupados: [] },
+      { horario: "10:00 PM", asientos_ocupados: [] },
+    ],
     precio: 9.99,
     clasificacion: "PG-13",
     sala: "4",

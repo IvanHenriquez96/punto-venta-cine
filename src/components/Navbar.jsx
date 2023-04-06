@@ -29,7 +29,12 @@ const Navbar = () => {
           <Link to="/" className="flex">
             {/* <span className="text-black sr-only">Logo</span>
           <span className="inline-block w-32 h-10 bg-red-200 rounded-lg"> LOGOO</span> */}
-            <h2>ihenriquez - Punto de Venta</h2>
+            {/* <h2>ihenriquez - Punto de Venta</h2> */}
+            <img
+              className="w-12"
+              src="https://cdn-icons-png.flaticon.com/512/1038/1038100.png"
+              alt=""
+            />
           </Link>
         </div>
 

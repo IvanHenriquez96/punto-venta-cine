@@ -20,7 +20,7 @@ const InfoMovie = () => {
     return <p>Cargando</p>;
   } else {
     return (
-      <div className="grid min-h-screen App bg-slate-800 min-w-screen text-gray-50 md:grid-cols-3 md:gap-4">
+      <div className="grid min-h-screen App bg-slate-800 min-w-screen text-gray-50 md:grid-cols-3 md:gap-4 fade-in">
         <div className="mx-4 md:mx-32">
           <img className="w-3/4 mx-auto my-10 md:w-full" src={data.imagen} />
           <p>
@@ -40,7 +40,7 @@ const InfoMovie = () => {
                 }`}
                 onClick={handleHorario}
               >
-                {horario}
+                {horario.horario}
               </div>
             ))}
           </div>
@@ -77,7 +77,7 @@ const InfoMovie = () => {
               Seleccione un horario
             </div>
           ) : (
-            <div className="p-1 mx-4 border rounded-lg my-7 md:min-h-2/3 md:h-2/3 min-h-96 md:p-5">
+            <div className="p-1 mx-4 border rounded-lg my-7 md:min-h-2/3 md:h-2/3 min-h-96 md:p-5 fade-in">
               <div className="grid grid-cols-12">
                 <div>
                   <Seat />

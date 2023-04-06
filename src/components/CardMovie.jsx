@@ -27,7 +27,7 @@ const CardMovie = ({ movie }) => {
         <div className="flex p-2 mt-2 border border-white rounded gap-x-4">
           {movie.horarios.map((horario, index) => (
             <h4 key={index} className="font-semibold">
-              {horario}
+              {horario.horario}
             </h4>
           ))}
         </div>
