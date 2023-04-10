@@ -4,8 +4,8 @@ export const movies = [
     nombre: "Avengers: Endgame",
     horarios: [
       { horario: "10:00 AM", asientos_ocupados: ["A3"] },
-      { horario: "2:00 PM", asientos_ocupados: [] },
-      { horario: "7:00 PM", asientos_ocupados: [] },
+      { horario: "2:00 PM", asientos_ocupados: ["C1", "C2"] },
+      { horario: "7:00 PM", asientos_ocupados: ["A1", "B1", "C1"] },
     ],
     precio: 6100,
     clasificacion: "PG-13",

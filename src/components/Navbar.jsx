@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { CartContext } from "../context/cartContext";
 
 const Navbar = () => {
+  const { tickets, precioTotal } = useContext(CartContext);
+  // console.log(tickets, precioTotal);
   return (
     <header
       aria-label="Site Header"

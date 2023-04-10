@@ -14,6 +14,7 @@ const InfoMovie = () => {
   const handleHorario = (e) => {
     let btnHorario = e.target;
     setHorarioSeleccionado(btnHorario.getAttribute("movie_id"));
+    console.log("deberia refrescarse");
   };
 
   const calcularTotal = (arrayAsientosSeleccionados) => {

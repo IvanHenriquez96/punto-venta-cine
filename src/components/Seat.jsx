@@ -9,11 +9,15 @@ const Seat = ({
   const [isOcupado, setIsOcupado] = useState(false);
   const [isSeleccionado, setIsSeleccionado] = useState(false);
 
+  console.log(asientosOcupados);
   useEffect(() => {
     if (asientosOcupados.includes(nombre)) {
+      console.log({ nombre }, asientosOcupados);
       setIsOcupado(true);
+    } else {
+      setIsOcupado(false);
     }
-  }, []);
+  }, [asientosOcupados]);
 
   const toggleSeat = (e) => {
     if (!isOcupado) {
