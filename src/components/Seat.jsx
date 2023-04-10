@@ -35,12 +35,12 @@ const Seat = ({
           nombre={nombre}
           className={`cursor-pointer h-7 md:h-14 md:mx-auto my-2 mx-1 font-semibold md:w-12 rounded-tl-xl rounded-tr-xl ${
             isSeleccionado ? "bg-red-600" : "bg-white"
-          } group-hover:bg-red-400 `}
+          } md:group-hover:bg-red-400 `}
         >
           <p
             className={`text-sm text-center ${
               isSeleccionado ? "text-white" : "text-gray-600"
-            }  group-hover:text-white`}
+            }  md:group-hover:text-white`}
           >
             {nombre}
           </p>
