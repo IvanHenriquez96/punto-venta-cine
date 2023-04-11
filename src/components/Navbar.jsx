@@ -1,17 +1,19 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { CartContext } from "../context/cartContext";
-import { useSelector, useDispatch } from "react-redux";
-import { agregar_al_carrito, quitar_del_carrito } from "../features/cart/cartSlice";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
-  const { tickets, precioTotal } = useContext(CartContext);
-
   const cantidad_tickets = useSelector((state) => state.cart.cantidad_tickets);
   const precio_total = useSelector((state) => state.cart.precio_total);
-  const dispatch = useDispatch();
+
+  const [isOpenCarrito, setIsOpenCarrito] = useState(false);
 
   // console.log(tickets, precioTotal);
+
+  const toggleCarrito = () => {
+    setIsOpenCarrito(!isOpenCarrito);
+  };
+
   return (
     <header
       aria-label="Site Header"
@@ -80,7 +82,8 @@ const Navbar = () => {
               <span>
                 <div
                   // to="/carrito"
-                  className="block p-6 border-b-4 border-transparent cursor-pointer hover:border-red-700"
+                  className="relative block p-6 border-b-4 border-transparent cursor-pointer hover:border-red-700"
+                  onClick={toggleCarrito}
                 >
                   <svg
                     className="w-4 h-4"
@@ -96,7 +99,17 @@ const Navbar = () => {
                       d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
                     />
                   </svg>
-                  {cantidad_tickets} {precio_total}
+
+                  {isOpenCarrito && (
+                    <div
+                      id="carrito"
+                      className="absolute right-0 z-10 p-4 border-2 border-white bg-slate-700 top-16 w-44 rounded-xl fade-in"
+                    >
+                      <p>Tickets: {cantidad_tickets}</p>
+                      <p>Total: ${precio_total}</p>
+                    </div>
+                  )}
+
                   <span className="sr-only">Cart </span>
                 </div>
               </span>
@@ -152,10 +165,10 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <button className="mr-5" onClick={() => dispatch(agregar_al_carrito(6100))}>
+      {/* <button className="mr-5" onClick={() => dispatch(agregar_al_carrito(6100))}>
         agregar
       </button>
-      <button onClick={() => dispatch(quitar_del_carrito(6100))}>quitar</button>
+      <button onClick={() => dispatch(quitar_del_carrito(6100))}>quitar</button> */}
     </header>
   );
 };

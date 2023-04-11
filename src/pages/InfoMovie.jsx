@@ -2,23 +2,21 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useFind } from "../hooks/useFind";
 import SeatPicker from "../components/SeatPicker";
+import { useSelector } from "react-redux";
 
 const InfoMovie = () => {
   //States
   let { id } = useParams();
   let { data, isLoading } = useFind(id);
   const [horarioSeleccionado, setHorarioSeleccionado] = useState(null);
-  const [precioTotal, setPrecioTotal] = useState(0);
+
+  const precio_total = useSelector((state) => state.cart.precio_total);
 
   //Functions
   const handleHorario = (e) => {
     let btnHorario = e.target;
     setHorarioSeleccionado(btnHorario.getAttribute("movie_id"));
     console.log("deberia refrescarse");
-  };
-
-  const calcularTotal = (arrayAsientosSeleccionados) => {
-    setPrecioTotal(data.precio * arrayAsientosSeleccionados.length);
   };
 
   if (isLoading) {
@@ -55,7 +53,6 @@ const InfoMovie = () => {
             datosMovie={data}
             horarioSeleccionado={horarioSeleccionado}
             asientosOcupados={data.horarios.asientos_ocupados}
-            calcularTotal={calcularTotal}
           />
 
           <div className="grid grid-cols-2 p-4 mx-4 border rounded-lg my-7 gap-x-4">
@@ -63,7 +60,7 @@ const InfoMovie = () => {
               <b>Precio Ticket:</b> ${data.precio}
             </div>
             <div>
-              <b>Total</b>: ${precioTotal}
+              <b>Total</b>: ${precio_total}
             </div>
           </div>
         </div>

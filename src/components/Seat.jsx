@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { agregar_al_carrito, quitar_del_carrito } from "../features/cart/cartSlice";
 
-const Seat = ({
-  nombre = "",
-  asientosOcupados,
-  setAsientosSeleccionados,
-  asientosSeleccionados,
-}) => {
+const Seat = ({ nombre = "", asientosOcupados, datosMovie, horarioSeleccionado }) => {
+  const dispatch = useDispatch();
+
   const [isOcupado, setIsOcupado] = useState(false);
   const [isSeleccionado, setIsSeleccionado] = useState(false);
 
-  console.log(asientosOcupados);
+  //Verifica si está ocupado y setea el estado
   useEffect(() => {
     if (asientosOcupados.includes(nombre)) {
-      console.log({ nombre }, asientosOcupados);
       setIsOcupado(true);
     } else {
       setIsOcupado(false);
@@ -22,6 +20,23 @@ const Seat = ({
   const toggleSeat = (e) => {
     if (!isOcupado) {
       setIsSeleccionado(!isSeleccionado);
+
+      let asiento_seleccionado = {
+        id_pelicula: datosMovie.id,
+        nombre: datosMovie.nombre,
+        horario: datosMovie.horarios[horarioSeleccionado].horario,
+        asiento: nombre,
+        precio: datosMovie.precio,
+      };
+
+      if (!isSeleccionado) {
+        // console.log(true); //lo quiere agregar
+        // console.log(datosMovie, horarioSeleccionado);
+
+        dispatch(agregar_al_carrito(asiento_seleccionado));
+      } else {
+        dispatch(quitar_del_carrito(asiento_seleccionado));
+      }
     }
   };
 

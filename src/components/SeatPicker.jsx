@@ -1,19 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Seat from "./Seat";
 
 const SeatPicker = ({ datosMovie, horarioSeleccionado = null, calcularTotal }) => {
-  console.log("entra a SeatPicker");
+  // console.log("entra a SeatPicker");
   const filas = ["A", "B", "", "C", "D", "E", "F", "G", "H", "", "I", "K"];
   const asientos = [1, 2, 3, 4, 5, 6, 7, 8];
   const [asientosSeleccionados, setAsientosSeleccionados] = useState([]);
-
-  // useEffect(() => {
-  //   //calcula el total
-  //   calcularTotal(asientosSeleccionados);
-  //   //solo se vuelve a ejecutar si cambia la variable asientosSeleccionados
-  // }, [asientosSeleccionados]);
-
-  console.log(horarioSeleccionado);
 
   return (
     <>
@@ -51,8 +43,10 @@ const SeatPicker = ({ datosMovie, horarioSeleccionado = null, calcularTotal }) =
                             datosMovie.horarios[horarioSeleccionado].asientos_ocupados
                           }
                           nombre={`${fila}${asiento}`}
-                          setAsientosSeleccionados={setAsientosSeleccionados}
-                          asientosSeleccionados={asientosSeleccionados}
+                          datosMovie={datosMovie}
+                          horarioSeleccionado={horarioSeleccionado}
+                          // setAsientosSeleccionados={setAsientosSeleccionados}
+                          // asientosSeleccionados={asientosSeleccionados}
                         />
                       )
                     );
