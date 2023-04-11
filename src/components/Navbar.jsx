@@ -1,9 +1,16 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { CartContext } from "../context/cartContext";
+import { useSelector, useDispatch } from "react-redux";
+import { agregar_al_carrito, quitar_del_carrito } from "../features/cart/cartSlice";
 
 const Navbar = () => {
   const { tickets, precioTotal } = useContext(CartContext);
+
+  const cantidad_tickets = useSelector((state) => state.cart.cantidad_tickets);
+  const precio_total = useSelector((state) => state.cart.precio_total);
+  const dispatch = useDispatch();
+
   // console.log(tickets, precioTotal);
   return (
     <header
@@ -89,8 +96,8 @@ const Navbar = () => {
                       d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
                     />
                   </svg>
-
-                  <span className="sr-only">Cart</span>
+                  {cantidad_tickets} {precio_total}
+                  <span className="sr-only">Cart </span>
                 </div>
               </span>
 
@@ -145,6 +152,10 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+      <button className="mr-5" onClick={() => dispatch(agregar_al_carrito(6100))}>
+        agregar
+      </button>
+      <button onClick={() => dispatch(quitar_del_carrito(6100))}>quitar</button>
     </header>
   );
 };
