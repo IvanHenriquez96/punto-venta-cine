@@ -6,7 +6,11 @@ const LayoutPublic = () => {
   return (
     <div>
       <Navbar />
-      <Outlet />
+      <br />
+      <br />
+      <div className="mt-4">
+        <Outlet />
+      </div>
     </div>
   );
 };

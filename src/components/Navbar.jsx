@@ -7,21 +7,25 @@ const Navbar = () => {
   const precio_total = useSelector((state) => state.cart.precio_total);
 
   const [isOpenCarrito, setIsOpenCarrito] = useState(false);
+  const [isOpenMenu, setIsOpenMenu] = useState(false);
 
   // console.log(tickets, precioTotal);
 
   const toggleCarrito = () => {
     setIsOpenCarrito(!isOpenCarrito);
   };
+  const toggleMenu = () => {
+    setIsOpenMenu(!isOpenMenu);
+  };
 
   return (
     <header
       aria-label="Site Header"
-      className="border-b border-red-100 bg-slate-900 text-gray-50"
+      className="fixed top-0 left-0 right-0 z-10 border-b border-red-100 bg-slate-900 text-gray-50"
     >
       <div className="flex items-center justify-between h-16 mx-auto max-w-screen-2xl sm:px-6 lg:px-8">
         <div className="flex items-center gap-4">
-          <button type="button" className="p-2 lg:hidden">
+          <button type="button" className="p-2 lg:hidden" onClick={toggleMenu}>
             <svg
               className="w-6 h-6"
               xmlns="http://www.w3.org/2000/svg"
@@ -63,17 +67,10 @@ const Navbar = () => {
             </Link>
 
             <Link
-              href="/news"
+              to="/cart"
               className="block h-16 border-b-4 border-transparent leading-[4rem] hover:border-current hover:text-red-700"
             >
-              News
-            </Link>
-
-            <Link
-              href="/contact"
-              className="block h-16 border-b-4 border-transparent leading-[4rem] hover:border-current hover:text-red-700"
-            >
-              Contact
+              Carrito
             </Link>
           </nav>
 
@@ -82,7 +79,7 @@ const Navbar = () => {
               <span>
                 <div
                   // to="/carrito"
-                  className="relative flex block p-6 border-b-4 border-transparent cursor-pointer hover:border-red-700"
+                  className="relative flex block p-4 border-b-4 border-transparent cursor-pointer hover:border-red-700"
                   onClick={toggleCarrito}
                 >
                   <svg
@@ -102,10 +99,6 @@ const Navbar = () => {
                   <div className="w-6 h-6 text-center bg-red-700 rounded-full">
                     <p>{cantidad_tickets}</p>
                   </div>
-                  {/* 
-                  <div className="absolute bottom-0 z-10 px-2 mx-auto text-sm bg-red-700 rounded-full right-1 top-1/2">
-                    0
-                  </div> */}
 
                   {isOpenCarrito && (
                     <div
@@ -114,68 +107,34 @@ const Navbar = () => {
                     >
                       <p>Tickets: {cantidad_tickets}</p>
                       <p>Total: ${precio_total}</p>
+                      <Link to="/cart">
+                        <button className="px-2 py-1 my-2 text-sm bg-red-700 rounded-lg">
+                          Ir al Carrito
+                        </button>
+                      </Link>
                     </div>
                   )}
 
                   <span className="sr-only">Cart </span>
                 </div>
               </span>
-
-              {/* <span>
-                <Link
-                  to="/account"
-                  className="block p-6 border-b-4 border-transparent hover:border-red-700"
-                >
-                  <svg
-                    className="w-4 h-4"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                    />
-                  </svg>
-
-                  <span className="sr-only"> Account </span>
-                </Link>
-              </span> */}
-
-              {/* <span className="hidden sm:block">
-                <a
-                  href="/search"
-                  className="block p-6 border-b-4 border-transparent hover:border-red-700"
-                >
-                  <svg
-                    className="w-4 h-4"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                    />
-                  </svg>
-
-                  <span className="sr-only"> Search </span>
-                </a>
-              </span> */}
             </div>
           </div>
         </div>
       </div>
-      {/* <button className="mr-5" onClick={() => dispatch(agregar_al_carrito(6100))}>
-        agregar
-      </button>
-      <button onClick={() => dispatch(quitar_del_carrito(6100))}>quitar</button> */}
+
+      {isOpenMenu && (
+        <div className="fixed z-20 w-1/2 h-full bg-opacity-90 bg-slate-700 md:hidden">
+          <div className="ml-3">
+            <p className="my-5 font-semibold">
+              <Link to="/">Cartelera</Link>
+            </p>
+            <p className="my-5 font-semibold">
+              <Link to="/cart">Carrito</Link>
+            </p>
+          </div>
+        </div>
+      )}
     </header>
   );
 };

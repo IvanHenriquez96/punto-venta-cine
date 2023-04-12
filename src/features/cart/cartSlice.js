@@ -1,11 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { movies } from "../../Controllers/MoviesController";
 
-const initialState = {
+let initialState = {
   tickets: [],
   precio_total: 0,
   cantidad_tickets: 0,
 };
+
+if (localStorage.getItem("initialStateCarrito")) {
+  initialState = JSON.parse(localStorage.getItem("initialStateCarrito"));
+}
 
 //carga la estructura del carrito en su estado inicial
 movies.forEach((movie) => {
@@ -18,6 +22,7 @@ movies.forEach((movie) => {
   let pelicula = {
     id: movie.id,
     nombre: movie.nombre,
+    imagen: movie.imagen,
     precio: movie.precio,
     sala: movie.sala,
     horarios: horario,
@@ -41,6 +46,9 @@ export const cartSlice = createSlice({
 
       state.precio_total += action.payload.precio;
       state.cantidad_tickets += 1;
+
+      //actualiza localstorage
+      localStorage.setItem("initialStateCarrito", JSON.stringify(state));
     },
     quitar_del_carrito: (state, action) => {
       // console.log("action quitar del_carrito con el payload:", action.payload);

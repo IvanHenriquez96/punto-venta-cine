@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useFind } from "../hooks/useFind";
 import SeatPicker from "../components/SeatPicker";
@@ -65,9 +65,12 @@ const InfoMovie = () => {
           </div>
 
           <div className="flex justify-center w-100">
-            <button className="w-full p-1 mx-4 font-semibold bg-red-600 rounded-lg mb-7 md:w-1/2">
+            <Link
+              to="/cart"
+              className="w-full p-1 mx-4 font-semibold text-center bg-red-600 rounded-lg cursor-pointer mb-7 md:w-1/2"
+            >
               IR AL CARRITO
-            </button>
+            </Link>
           </div>
         </div>
       </div>
