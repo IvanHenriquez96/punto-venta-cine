@@ -5,7 +5,6 @@ const SeatPicker = ({ datosMovie, horarioSeleccionado = null, calcularTotal }) =
   // console.log("entra a SeatPicker");
   const filas = ["A", "B", "", "C", "D", "E", "F", "G", "H", "", "I", "K"];
   const asientos = [1, 2, 3, 4, 5, 6, 7, 8];
-  const [asientosSeleccionados, setAsientosSeleccionados] = useState([]);
 
   return (
     <>
@@ -45,8 +44,6 @@ const SeatPicker = ({ datosMovie, horarioSeleccionado = null, calcularTotal }) =
                           nombre={`${fila}${asiento}`}
                           datosMovie={datosMovie}
                           horarioSeleccionado={horarioSeleccionado}
-                          // setAsientosSeleccionados={setAsientosSeleccionados}
-                          // asientosSeleccionados={asientosSeleccionados}
                         />
                       )
                     );

@@ -82,11 +82,11 @@ const Navbar = () => {
               <span>
                 <div
                   // to="/carrito"
-                  className="relative block p-6 border-b-4 border-transparent cursor-pointer hover:border-red-700"
+                  className="relative flex block p-6 border-b-4 border-transparent cursor-pointer hover:border-red-700"
                   onClick={toggleCarrito}
                 >
                   <svg
-                    className="w-4 h-4"
+                    className="w-4 h-4 mt-1 mr-1"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -99,6 +99,13 @@ const Navbar = () => {
                       d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
                     />
                   </svg>
+                  <div className="w-6 h-6 text-center bg-red-700 rounded-full">
+                    <p>{cantidad_tickets}</p>
+                  </div>
+                  {/* 
+                  <div className="absolute bottom-0 z-10 px-2 mx-auto text-sm bg-red-700 rounded-full right-1 top-1/2">
+                    0
+                  </div> */}
 
                   {isOpenCarrito && (
                     <div
@@ -114,7 +121,7 @@ const Navbar = () => {
                 </div>
               </span>
 
-              <span>
+              {/* <span>
                 <Link
                   to="/account"
                   className="block p-6 border-b-4 border-transparent hover:border-red-700"
@@ -136,9 +143,9 @@ const Navbar = () => {
 
                   <span className="sr-only"> Account </span>
                 </Link>
-              </span>
+              </span> */}
 
-              <span className="hidden sm:block">
+              {/* <span className="hidden sm:block">
                 <a
                   href="/search"
                   className="block p-6 border-b-4 border-transparent hover:border-red-700"
@@ -160,7 +167,7 @@ const Navbar = () => {
 
                   <span className="sr-only"> Search </span>
                 </a>
-              </span>
+              </span> */}
             </div>
           </div>
         </div>

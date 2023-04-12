@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useFind } from "../hooks/useFind";
 import SeatPicker from "../components/SeatPicker";
 import { useSelector } from "react-redux";
@@ -25,12 +25,12 @@ const InfoMovie = () => {
     return (
       <div className="grid min-h-screen App bg-slate-800 min-w-screen text-gray-50 md:grid-cols-3 md:gap-4 fade-in">
         <div className="mx-4 md:mx-32">
-          <img className="w-3/4 mx-auto my-10 md:w-full" src={data.imagen} />
+          <img className="w-3/4 mx-auto my-10 rounded-lg md:w-full" src={data.imagen} />
           <p>
             <b>Nombre: </b>
             {data.nombre}
           </p>
-          <p className="my-3">Seleccione el horario:</p>
+          <p className="my-3 font-bold">Seleccione el horario:</p>
           <div className="flex justify-center w-full px-1 py-4 border rounded-lg">
             {data.horarios.map((horario, index) => (
               <div
@@ -57,11 +57,17 @@ const InfoMovie = () => {
 
           <div className="grid grid-cols-2 p-4 mx-4 border rounded-lg my-7 gap-x-4">
             <div>
-              <b>Precio Ticket:</b> ${data.precio}
+              <b>Precio:</b> ${data.precio}
             </div>
             <div>
               <b>Total</b>: ${precio_total}
             </div>
+          </div>
+
+          <div className="flex justify-center w-100">
+            <button className="w-full p-1 mx-4 font-semibold bg-red-600 rounded-lg mb-7 md:w-1/2">
+              IR AL CARRITO
+            </button>
           </div>
         </div>
       </div>

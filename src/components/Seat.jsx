@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { agregar_al_carrito, quitar_del_carrito } from "../features/cart/cartSlice";
 
 const Seat = ({ nombre = "", asientosOcupados, datosMovie, horarioSeleccionado }) => {
@@ -8,14 +8,27 @@ const Seat = ({ nombre = "", asientosOcupados, datosMovie, horarioSeleccionado }
   const [isOcupado, setIsOcupado] = useState(false);
   const [isSeleccionado, setIsSeleccionado] = useState(false);
 
+  const tickets = useSelector((state) => state.cart.tickets);
+
   //Verifica si está ocupado y setea el estado
   useEffect(() => {
+    setIsSeleccionado(false); //al renderizar por defecto lo deselecciona
     if (asientosOcupados.includes(nombre)) {
       setIsOcupado(true);
     } else {
       setIsOcupado(false);
     }
-  }, [asientosOcupados]);
+
+    //verifica si ya está seleccionado (aggregado al carrito y lo marca como seleccionado)
+    let pelicula = tickets.find((ticket) => ticket.id === datosMovie.id);
+    let horarios = pelicula.horarios[horarioSeleccionado];
+
+    if (horarios.asientos_seleccionados.includes(nombre)) {
+      setIsSeleccionado(true);
+    } else {
+      setIsSeleccionado(false);
+    }
+  }, [asientosOcupados, horarioSeleccionado]);
 
   const toggleSeat = (e) => {
     if (!isOcupado) {
@@ -30,9 +43,6 @@ const Seat = ({ nombre = "", asientosOcupados, datosMovie, horarioSeleccionado }
       };
 
       if (!isSeleccionado) {
-        // console.log(true); //lo quiere agregar
-        // console.log(datosMovie, horarioSeleccionado);
-
         dispatch(agregar_al_carrito(asiento_seleccionado));
       } else {
         dispatch(quitar_del_carrito(asiento_seleccionado));
