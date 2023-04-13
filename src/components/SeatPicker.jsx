@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import Seat from "./Seat";
 
-const SeatPicker = ({ datosMovie, horarioSeleccionado = null, calcularTotal }) => {
+const SeatPicker = ({ datosMovie, horarioSeleccionado = null }) => {
   // console.log("entra a SeatPicker");
   const filas = ["A", "B", "", "C", "D", "E", "F", "G", "H", "", "I", "K"];
   const asientos = [1, 2, 3, 4, 5, 6, 7, 8];

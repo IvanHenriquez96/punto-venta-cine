@@ -66,9 +66,20 @@ export const cartSlice = createSlice({
       state.precio_total -= action.payload.precio;
       state.cantidad_tickets -= 1;
     },
+    verificar_asientos: (state, action) => {
+      console.log("verificando asientos");
+    },
+    pagar_carrito: (state, action) => {
+      console.log("pagando...");
+    },
   },
 });
 
-export const { agregar_al_carrito, quitar_del_carrito } = cartSlice.actions;
+export const {
+  agregar_al_carrito,
+  quitar_del_carrito,
+  verificar_asientos,
+  pagar_carrito,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;
