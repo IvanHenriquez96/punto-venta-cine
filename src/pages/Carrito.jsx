@@ -19,10 +19,13 @@ const Carrito = () => {
   const [isSimulandoPago, setIsSimulandoPago] = useState(false);
 
   useEffect(() => {
-    buscarEntradasSeleccionadas();
     dispatch(cerrar_menu());
     dispatch(cerrar_popover());
   }, []);
+
+  useEffect(() => {
+    buscarEntradasSeleccionadas();
+  }, [tickets]);
 
   const pagar = () => {
     setIsPagando(true);
@@ -71,9 +74,9 @@ const Carrito = () => {
         //vacia el carrito
         dispatch(vaciar_carrito());
 
-        navigate("/pagoExitoso");
-      }, 1000);
-    }, 1000);
+        navigate("/pagoExitoso#");
+      }, 3000);
+    }, 3000);
   };
 
   const buscarEntradasSeleccionadas = async () => {

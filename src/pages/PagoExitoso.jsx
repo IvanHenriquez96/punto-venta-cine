@@ -7,7 +7,7 @@ const PagoExitoso = () => {
 
   return (
     <>
-      <div className="min-h-screen px-4 text-white App bg-slate-800 md:px-32">
+      <div className="min-h-screen px-4 text-white App bg-slate-800 md:px-32 fade-in">
         <h2 className="text-3xl font-semibold py-7">Pago realizado con éxito!</h2>
 
         <p className="p-2 border rounded-lg my-7">
