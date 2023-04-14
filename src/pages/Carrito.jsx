@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import ProductoTicket from "../components/ProductoTicket";
-import { pagar_carrito } from "../features/cart/cartSlice";
+import { movies } from "../Controllers/MoviesController";
+import { vaciar_carrito } from "../features/cart/cartSlice";
 
 const Carrito = () => {
   const dispatch = useDispatch();
@@ -24,18 +25,52 @@ const Carrito = () => {
     setIsPagando(true);
 
     //verifica los asientos
-    console.log("mis tickts en el carrito", tickets);
 
     setTimeout(() => {
       setIsPagando(false);
-
-      // dispatch(pagar_carrito());
       setIsSimulandoPago(true);
-
       setTimeout(() => {
+        //agrega los asientos en el controller (localstorage)
+
+        if (localStorage.getItem("movies")) {
+          var stock = JSON.parse(localStorage.getItem("movies"));
+        } else {
+          var stock = movies;
+        }
+
+        //recorre las peliculas del carrito
+        tickets.forEach((pelicula) => {
+          //obtiene los horarios
+          let horarios = pelicula.horarios;
+          //recorre los horarios
+          horarios.forEach((horario) => {
+            if (horario.asientos_seleccionados.length > 0) {
+              //si tiene asientos seleccionados los obtiene
+              let asientos = horario.asientos_seleccionados;
+
+              //encuentra la pelicula del stock
+              let buscado = stock.find((ticket) => {
+                return ticket.id == 1;
+              });
+
+              //busca el horario del stock
+              let _horario = buscado.horarios.find((h) => {
+                return h.horario == horario.horario;
+              });
+
+              _horario.asientos_ocupados = [..._horario.asientos_ocupados, ...asientos];
+            }
+          });
+        });
+
+        //actualiza el stock
+        localStorage.setItem("movies", JSON.stringify(stock));
+        //vacia el carrito
+        dispatch(vaciar_carrito());
+
         navigate("/pagoExitoso");
-      }, 3000);
-    }, 3000);
+      }, 1000);
+    }, 1000);
   };
 
   const buscarEntradasSeleccionadas = async () => {
@@ -56,12 +91,12 @@ const Carrito = () => {
       });
 
       setEntradas(ent);
-      console.log(entradas);
+      // console.log(entradas);
     }
   };
   return (
     <>
-      <div className="relative min-h-screen px-4 text-white bg-slate-700 md:px-32 fade-in">
+      <div className="relative min-h-screen px-4 text-white bg-slate-800 md:px-32 fade-in">
         <h2 className="text-3xl font-semibold py-7">Carrito</h2>
         {cantidad_tickets == 0 ? (
           <div>

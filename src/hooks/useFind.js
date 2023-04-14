@@ -11,7 +11,13 @@ export const useFind = (id) => {
   }, [id]);
 
   const buscar = (id) => {
-    let res = movies.find((movie) => movie.id == id);
+    if (localStorage.getItem("movies")) {
+      var stock = JSON.parse(localStorage.getItem("movies"));
+    } else {
+      var stock = movies;
+    }
+
+    let res = stock.find((movie) => movie.id == id);
     setData(res);
     setIsLoading(false);
   };

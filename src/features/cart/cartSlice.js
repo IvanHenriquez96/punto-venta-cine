@@ -9,28 +9,28 @@ let initialState = {
 
 if (localStorage.getItem("initialStateCarrito")) {
   initialState = JSON.parse(localStorage.getItem("initialStateCarrito"));
-}
-
-//carga la estructura del carrito en su estado inicial
-movies.forEach((movie) => {
-  let horario = movie.horarios.map((horario) => {
-    return {
-      horario: horario.horario,
-      asientos_seleccionados: [],
+} else {
+  //carga la estructura del carrito en su estado inicial
+  movies.forEach((movie) => {
+    let horario = movie.horarios.map((horario) => {
+      return {
+        horario: horario.horario,
+        asientos_seleccionados: [],
+      };
+    });
+    let pelicula = {
+      id: movie.id,
+      nombre: movie.nombre,
+      imagen: movie.imagen,
+      precio: movie.precio,
+      sala: movie.sala,
+      horarios: horario,
     };
-  });
-  let pelicula = {
-    id: movie.id,
-    nombre: movie.nombre,
-    imagen: movie.imagen,
-    precio: movie.precio,
-    sala: movie.sala,
-    horarios: horario,
-  };
 
-  //estructura hecha, se agrega al array tickets de InitialState
-  initialState.tickets.push(pelicula);
-});
+    //estructura hecha, se agrega al array tickets de InitialState
+    initialState.tickets.push(pelicula);
+  });
+}
 
 export const cartSlice = createSlice({
   name: "cart",
@@ -66,20 +66,24 @@ export const cartSlice = createSlice({
       state.precio_total -= action.payload.precio;
       state.cantidad_tickets -= 1;
     },
-    verificar_asientos: (state, action) => {
-      console.log("verificando asientos");
-    },
-    pagar_carrito: (state, action) => {
-      console.log("pagando...");
+    vaciar_carrito: (state, action) => {
+      console.log("vacia carrito", state);
+      state.precio_total = 0;
+      state.cantidad_tickets = 0;
+
+      state.tickets.forEach((pelicula) => {
+        pelicula.horarios.forEach((horario) => {
+          horario.asientos_seleccionados = [];
+        });
+      });
+
+      //deja el nuevo estado como estado inicial en el localstorage
+      localStorage.setItem("initialStateCarrito", JSON.stringify(state));
     },
   },
 });
 
-export const {
-  agregar_al_carrito,
-  quitar_del_carrito,
-  verificar_asientos,
-  pagar_carrito,
-} = cartSlice.actions;
+export const { agregar_al_carrito, quitar_del_carrito, vaciar_carrito } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;

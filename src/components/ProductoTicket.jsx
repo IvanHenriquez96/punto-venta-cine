@@ -1,7 +1,25 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { quitar_del_carrito } from "../features/cart/cartSlice";
 
 const ProductoTicket = ({ entrada }) => {
-  console.log(entrada);
+  const dispatch = useDispatch();
+
+  const eliminarProductos = () => {
+    entrada.horario.asientos_seleccionados.forEach((asiento) => {
+      let asiento_seleccionado = {
+        id_pelicula: entrada.ticket.id,
+        nombre: entrada.ticket.nombre,
+        horario: entrada.horario.horario,
+        asiento: asiento,
+        precio: entrada.ticket.precio,
+      };
+
+      dispatch(quitar_del_carrito(asiento_seleccionado));
+    });
+
+    console.log("va a eliminar:", entrada);
+  };
   return (
     <div className="grid grid-cols-5 p-2 my-5 border rounded-lg">
       <img className="w-16 mx-auto my-auto md:w-36" src={entrada.ticket.imagen} alt="" />
@@ -23,7 +41,8 @@ const ProductoTicket = ({ entrada }) => {
           viewBox="0 0 24 24"
           strokeWidth="1.5"
           stroke="currentColor"
-          className="w-4 h-4"
+          className="w-4 h-4 cursor-pointer"
+          onClick={eliminarProductos}
         >
           <path
             strokeLinecap="round"
