@@ -1,9 +1,18 @@
 import "./App.css";
 import CardMovie from "./components/CardMovie";
 import { movies } from "./Controllers/MoviesController";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { cerrar_menu, cerrar_popover } from "./features/menu/menuSlice";
 
 function App() {
+  const dispatch = useDispatch();
   //sube movies a localstorage
+
+  useEffect(() => {
+    dispatch(cerrar_menu());
+    dispatch(cerrar_popover());
+  }, []);
 
   if (localStorage.getItem("movies")) {
     var stock = JSON.parse(localStorage.getItem("movies"));
@@ -12,8 +21,6 @@ function App() {
 
     var stock = movies;
   }
-
-  // console.log(stock);
 
   return (
     <div className="min-h-screen App bg-slate-800 min-w-screen text-gray-50 fade-in">

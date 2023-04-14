@@ -1,21 +1,22 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { toggle_menu, toggle_popover } from "../features/menu/menuSlice";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
   const cantidad_tickets = useSelector((state) => state.cart.cantidad_tickets);
   const precio_total = useSelector((state) => state.cart.precio_total);
 
-  const [isOpenCarrito, setIsOpenCarrito] = useState(false);
-  const [isOpenMenu, setIsOpenMenu] = useState(false);
-
-  // console.log(tickets, precioTotal);
+  // const [isOpenCarrito, setIsOpenCarrito] = useState(false);
+  const isOpenMenu = useSelector((state) => state.menu.menu);
+  const isOpenCarrito = useSelector((state) => state.menu.popover);
 
   const toggleCarrito = () => {
-    setIsOpenCarrito(!isOpenCarrito);
+    dispatch(toggle_popover());
   };
   const toggleMenu = () => {
-    setIsOpenMenu(!isOpenMenu);
+    dispatch(toggle_menu());
   };
 
   return (

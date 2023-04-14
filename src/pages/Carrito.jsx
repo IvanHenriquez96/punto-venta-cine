@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import ProductoTicket from "../components/ProductoTicket";
 import { movies } from "../Controllers/MoviesController";
 import { vaciar_carrito } from "../features/cart/cartSlice";
+import { cerrar_menu, cerrar_popover } from "../features/menu/menuSlice";
 
 const Carrito = () => {
   const dispatch = useDispatch();
@@ -19,6 +20,8 @@ const Carrito = () => {
 
   useEffect(() => {
     buscarEntradasSeleccionadas();
+    dispatch(cerrar_menu());
+    dispatch(cerrar_popover());
   }, []);
 
   const pagar = () => {
