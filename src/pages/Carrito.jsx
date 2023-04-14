@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ProductoTicket from "../components/ProductoTicket";
 import { pagar_carrito } from "../features/cart/cartSlice";
 
 const Carrito = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const tickets = useSelector((state) => state.cart.tickets);
   const cantidad_tickets = useSelector((state) => state.cart.cantidad_tickets);
@@ -28,10 +29,13 @@ const Carrito = () => {
     setTimeout(() => {
       setIsPagando(false);
 
-      dispatch(pagar_carrito());
-
+      // dispatch(pagar_carrito());
       setIsSimulandoPago(true);
-    }, 2000);
+
+      setTimeout(() => {
+        navigate("/pagoExitoso");
+      }, 3000);
+    }, 3000);
   };
 
   const buscarEntradasSeleccionadas = async () => {
@@ -76,24 +80,42 @@ const Carrito = () => {
           </div>
         )}
         {isPagando && (
-          <div className="p-4 my-5 border rounded-lg animate-pulse">
-            <p>Verificando si sus asientos siguen disponibles...</p>
+          <div className="flex items-center p-4 my-5 border rounded-lg animate-pulse">
+            <svg
+              className="w-10 mr-2 animate-spin"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  opacity="0.2"
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                  d="M12 19C15.866 19 19 15.866 19 12C19 8.13401 15.866 5 12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19ZM12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                  fill="#FFFF"
+                ></path>
+                <path
+                  d="M2 12C2 6.47715 6.47715 2 12 2V5C8.13401 5 5 8.13401 5 12H2Z"
+                  fill="red"
+                ></path>
+              </g>
+            </svg>
+
+            <p>Simulando verificación de asientos disponibles...</p>
           </div>
         )}
-        {cantidad_tickets > 0 && (
-          <div className="flex items-center justify-between p-4 border rounded-lg">
-            <p>Total: ${precio_total}</p>
-            <button className="px-2 py-1 bg-red-700 rounded-lg" onClick={pagar}>
-              Pagar Tickets
-            </button>
-          </div>
-        )}
-        <br /> <br />
         {isSimulandoPago && (
-          <div className="absolute inset-0 overflow-hidden bg-slate-900">
-            <div className="absolute inset-0 flex items-center justify-center w-16 h-16 border rounded-lg bg-slate-800 md:inset-44 fade-in">
+          <>
+            <div className="flex items-center p-4 my-5 border rounded-lg animate-pulse">
               <svg
-                className="w-10 animate-spin"
+                className="w-10 mr-2 animate-spin"
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -118,11 +140,19 @@ const Carrito = () => {
                   ></path>
                 </g>
               </svg>
-
-              <div className="">Simulando pago...</div>
+              <p>Simulando pago...</p>
             </div>
+          </>
+        )}
+        {cantidad_tickets > 0 && (
+          <div className="flex items-center justify-between p-4 border rounded-lg">
+            <p>Total: ${precio_total}</p>
+            <button className="px-2 py-1 bg-red-700 rounded-lg" onClick={pagar}>
+              Pagar Tickets
+            </button>
           </div>
         )}
+        <br /> <br />
       </div>
     </>
   );
